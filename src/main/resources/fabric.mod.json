@@ -4,6 +4,7 @@
   "version": "${version}",
   "name": "SharpScale",
   "description": "Fine-grained GUI scale in 0.25 steps (x0.5 to x8) with sharp, pixel-aligned text and icons. Change it with [ and ] or from Mod Menu.",
+  "icon": "assets/sharpscale/icon.png",
   "authors": [
     "Adrián García"
   ],
