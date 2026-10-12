@@ -1,0 +1,11 @@
+{
+  "required": false,
+  "package": "dev.instinct.sharpscale.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "GlyphMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

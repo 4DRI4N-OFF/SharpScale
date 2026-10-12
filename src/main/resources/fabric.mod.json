@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "sharpscale",
+  "version": "${version}",
+  "name": "SharpScale",
+  "description": "Fine-grained GUI scale in 0.25 steps (x0.5 to x8) with sharp, pixel-aligned text and icons. Change it with [ and ] or from Mod Menu.",
+  "authors": [
+    "Adrián García"
+  ],
+  "license": "MIT",
+  "environment": "client",
+  "accessWidener": "sharpscale.accesswidener",
+  "entrypoints": {
+    "client": [
+      "dev.instinct.sharpscale.SharpScale"
+    ],
+    "modmenu": [
+      "dev.instinct.sharpscale.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    {
+      "config": "sharpscale.client.mixins.json",
+      "environment": "client"
+    },
+    {
+      "config": "sharpscale.glyph.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "fabric-api": "*",
+    "minecraft": "~26.3"
+  }
+}
