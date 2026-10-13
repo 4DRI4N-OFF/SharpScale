@@ -3,7 +3,7 @@
   "id": "sharpscale",
   "version": "${version}",
   "name": "SharpScale",
-  "description": "Fine-grained GUI scale in 0.25 steps (x0.5 to x8) with sharp, pixel-aligned text and icons. Change it with [ and ] or from Mod Menu.",
+  "description": "Fine-grained GUI scale in 0.25 steps (x0.5 to x8), with a global JetBrains Mono font and a switch back to Minecraft. Change scale with [ and ] or Mod Menu.",
   "icon": "assets/sharpscale/icon.png",
   "authors": [
     "Adrián García"
@@ -32,6 +32,7 @@
   "depends": {
     "fabricloader": ">=0.19.5",
     "fabric-api": "*",
-    "minecraft": "~26.3"
+    "minecraft": "~26.3",
+    "java": ">=25"
   }
 }

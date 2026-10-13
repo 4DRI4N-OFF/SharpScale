@@ -6,7 +6,8 @@
     "GuiRendererMixin",
     "VideoSettingsMixin",
     "WindowMixin",
-    "DebugOverlayMixin"
+    "DebugOverlayMixin",
+    "FontMixin"
   ],
   "injectors": {
     "defaultRequire": 0

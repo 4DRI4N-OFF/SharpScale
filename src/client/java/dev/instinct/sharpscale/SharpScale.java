@@ -20,6 +20,8 @@ public class SharpScale implements ClientModInitializer {
 	private static final Path FILE = FabricLoader.getInstance().getConfigDir().resolve("sharpscale.txt");
 	private static final Path OLD_FILE = FabricLoader.getInstance().getConfigDir().resolve("finegui.txt");
 
+	public static boolean monoFont = true;
+	private static final Path FONT_FILE = FabricLoader.getInstance().getConfigDir().resolve("sharpscale-font.txt");
 	private static long lastMod = 0;
 
 	private static net.minecraft.client.KeyMapping keyUp;
@@ -51,12 +53,12 @@ public class SharpScale implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		load();
+		loadFont();
 		keyUp = net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper.registerKeyMapping(
 			new net.minecraft.client.KeyMapping("key.sharpscale.up", com.mojang.blaze3d.platform.InputConstants.KEY_RBRACKET, net.minecraft.client.KeyMapping.Category.MISC));
 		keyDown = net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper.registerKeyMapping(
 			new net.minecraft.client.KeyMapping("key.sharpscale.down", com.mojang.blaze3d.platform.InputConstants.KEY_LBRACKET, net.minecraft.client.KeyMapping.Category.MISC));
 		net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK.register(SharpScale::tickKeys);
-		net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK.register(SharpScaleSelfTest::tick);
 		// live reload when the config file is edited by hand (handy for testing)
 		net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK.register(mc -> {
 			try {
@@ -78,6 +80,14 @@ public class SharpScale implements ClientModInitializer {
 		});
 	}
 
+    private static void loadFont() {
+        try { if (Files.exists(FONT_FILE)) monoFont = !Files.readString(FONT_FILE).trim().equals("minecraft"); } catch (Exception ignored) {}
+    }
+    public static void toggleFont() {
+        boolean next = !monoFont;
+        try { Files.createDirectories(FONT_FILE.getParent()); Files.writeString(FONT_FILE, next ? "jetbrains_mono" : "minecraft"); monoFont = next; } catch (Exception e) { org.slf4j.LoggerFactory.getLogger("SharpScale").error("Cannot save font choice", e); return; }
+        Minecraft.getInstance().resizeGui();
+    }
 	public static boolean pureTranslation(org.joml.Matrix4fc m) {
 		return Math.abs(m.m00() - 1) < 1e-4 && Math.abs(m.m11() - 1) < 1e-4 && Math.abs(m.m01()) < 1e-4 && Math.abs(m.m10()) < 1e-4;
 	}
