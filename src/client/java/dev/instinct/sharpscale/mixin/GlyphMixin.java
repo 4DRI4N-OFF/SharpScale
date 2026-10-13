@@ -30,7 +30,12 @@ public abstract class GlyphMixin {
 
 	@Inject(method = "renderChar", at = @At("HEAD"), cancellable = true)
 	private void sharpscale$renderChar(BakedSheetGlyph.GlyphInstance gi, Matrix4fc pose, VertexConsumer buffer, int light, boolean flat, CallbackInfo ci) {
-		double s = SharpScale.current;
+		// TrueType glyphs use Minecraft's normal antialiased renderer. The bitmap-specific
+        // integer texel scaling below would distort their spacing at fractional scale.
+        if (SharpScale.monoFont && gi.style().getFont() instanceof net.minecraft.network.chat.FontDescription.Resource r
+            && r.id().getNamespace().equals("minecraft")
+            && (r.id().getPath().equals("default") || r.id().getPath().equals("uniform"))) return;
+        double s = SharpScale.current;
 		if (!flat || s < 1.0 || !SharpScale.pureTranslation(pose)) {
 			return;
 		}

@@ -1,1 +1,5 @@
-{"key.sharpscale.up":"GUI scale up","key.sharpscale.down":"GUI scale down"}
+{
+  "key.sharpscale.up": "GUI scale up",
+  "key.sharpscale.down": "GUI scale down",
+  "sharpscale.font": "Game font"
+}
